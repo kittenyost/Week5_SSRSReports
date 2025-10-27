@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SharedDataSet xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/shareddatasetdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <DataSet Name="DataSet1">
+    <Query>
+      <DataSourceReference>ClientWarehouseDataSource</DataSourceReference>
+      <CommandText>SELECT 
+    dc.Region,
+    dp.Category,
+    SUM(fs.Quantity)      AS TotalQuantity,
+    SUM(fs.TotalSaleAmount) AS TotalRevenue
+FROM dbo.FactSales fs
+JOIN dbo.DimCustomer dc ON fs.CustomerKey = dc.CustomerKey
+JOIN dbo.DimProduct  dp ON fs.ProductKey  = dp.ProductKey
+GROUP BY dc.Region, dp.Category
+ORDER BY dc.Region, dp.Category;
+</CommandText>
+    </Query>
+    <Fields>
+      <Field Name="Region">
+        <DataField>Region</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="Category">
+        <DataField>Category</DataField>
+        <rd:TypeName>System.String</rd:TypeName>
+      </Field>
+      <Field Name="TotalQuantity">
+        <DataField>TotalQuantity</DataField>
+        <rd:TypeName>System.Int32</rd:TypeName>
+      </Field>
+      <Field Name="TotalRevenue">
+        <DataField>TotalRevenue</DataField>
+        <rd:TypeName>System.Decimal</rd:TypeName>
+      </Field>
+    </Fields>
+  </DataSet>
+</SharedDataSet>

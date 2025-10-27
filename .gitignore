@@ -1,0 +1,10 @@
+﻿.vs/
+bin/
+obj/
+*.rdl.data
+*.rsuser
+*.user
+*.suo
+*.cache
+*.tmp
+*.log
